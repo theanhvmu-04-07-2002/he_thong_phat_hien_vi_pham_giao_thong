@@ -1,0 +1,20 @@
+Lỗi "Recursive use of cursors not allowed" thường xảy ra khi bạn sử dụng cùng một cursor 
+hoặc kết nối cơ sở dữ liệu trong nhiều luồng hoặc khi bạn gọi cùng một cursor từ nhiều vị trí trong mã mà không đóng cursor đúng cách.
+
+Dưới đây là một số điểm cần kiểm tra và cách khắc phục vấn đề này:
+
+1. Đảm bảo Không Sử Dụng Cùng Một Cursor Trong Nhiều Luồng
+Nếu bạn sử dụng nhiều luồng (như executor.submit trong đoạn mã của bạn), 
+hãy đảm bảo rằng không có luồng nào đang sử dụng cùng một cursor hoặc kết nối cơ sở dữ liệu. 
+Bạn có thể cần tạo một cursor mới trong từng luồng hoặc sử dụng một cách khác để quản lý truy vấn cơ sở dữ liệu.
+
+2. Sử Dụng Cursor Mới Cho Mỗi Truy Vấn
+Mỗi lần bạn thực hiện một truy vấn, hãy đảm bảo rằng bạn tạo một cursor mới. 
+Đừng sử dụng lại cursor cũ hoặc chia sẻ cursor giữa các hàm hoặc luồng.
+
+3. Đóng Cursor Sau Khi Sử Dụng
+Luôn đóng cursor sau khi bạn hoàn tất việc sử dụng nó để đảm bảo rằng các truy vấn không bị xung đột.
+
+4. Kiểm Tra Việc Sử Dụng Cơ Sở Dữ Liệu
+Nếu có nhiều luồng hoặc quá trình đồng thời truy cập cơ sở dữ liệu, 
+hãy đảm bảo rằng cơ sở dữ liệu của bạn có thể xử lý các truy vấn đồng thời mà không bị xung đột.

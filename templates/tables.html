@@ -110,8 +110,14 @@
                 <div class="container-fluid">
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
-                        <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Lịch sử</h6>
+                        <div class="card-header py-3 d-flex">
+                            <div class="mr-auto">
+                                <h6 class="m-0 font-weight-bold text-primary">Lịch sử</h6>
+                            </div>
+                            <div class="">
+                                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm " id="generate-report"><i
+                                    class="fas fa-download fa-sm text-white-50"></i>Xuất dữ liệu</a>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -121,7 +127,7 @@
                                             <th>ID</th>
                                             <th>Thời gian</th>
                                             <th>Hình ảnh</th>
-                                            <th>Video</th>
+                                            <th>Địa điểm</th>
                                             <th>Loại vi phạm</th>
                                         </tr>
                                     </thead>
@@ -192,6 +198,25 @@
                 ]
             });
         });
+        document.getElementById("generate-report").addEventListener("click", function() {
+        fetch('/create_report')
+        .then(response => {
+            if (response.ok) {
+                return response.blob();
+            }
+            throw new Error("Xuất dữ liệu thất bại");
+        })
+        .then(blob => {
+            const url = window.URL.createObjectURL(new Blob([blob]));
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = "thong_ke_vi_pham.xlsx";
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+        })
+        .catch(error => console.error('Lỗi:', error));
+    });
     </script>
 </body>
 </html>

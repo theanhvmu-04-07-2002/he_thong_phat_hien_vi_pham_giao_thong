@@ -101,10 +101,10 @@
                     <h1 class="h3 mb-2 text-gray-800">Camera</h1>
                     <p class="mb-4">Tổng hợp hệ thống camera</p>
                     <div class="row">
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-8 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Select Camera</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Chọn camera</h6>
                                 </div>
                                 <div class="card-body">
                                     <select id="videoSelect" class="form-control">
@@ -116,30 +116,30 @@
                                 <div class="col-lg-12 mb-4">
                                     <div class="card shadow mb-4">
                                         <div class="card-header py-3">
-                                            <h6 class="m-0 font-weight-bold text-primary">Camera Feed</h6>
+                                            <h6 class="m-0 font-weight-bold text-primary" oncontextmenu="openVideo(event)">Camera đã chọn</h6>
                                         </div>
                                         <div class="card-body">
-                                            <img id="cameraFeed" alt="Camera Feed" style="width:100%; height: auto;">
+                                            <img id="cameraFeed" alt="Camera Feed" style="width:100%; height: auto;" >
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 mb-4">
+                        <div class="col-lg-4 mb-4">
                             <div class="card shadow mb-4">
                                 <div class="card-header py-3">
-                                    <h6 class="m-0 font-weight-bold text-primary">Camera Settings</h6>
+                                    <h6 class="m-0 font-weight-bold text-primary">Thiết lập</h6>
                                 </div>
                                 <div class="card-body">
                                     <form>
                                         <div class="form-group">
-                                            <label for="detectionType">Detection Type:</label>
+                                            <label for="detectionType" style="font-weight: bold;">Chọn loại phát hiện:</label>
                                             <select id="detectionType" class="form-control">
-                                                <option value="none">None</option>
-                                                <option value="vehicle">Vehicle Detection</option>
-                                                <option value="helmet">Helmet Violation Detection</option>
-                                                <option value="lane">Lane Departure Detection</option>
-                                                <option value="light">Traffic Light Violation Detection</option>
+                                                <option value="none">Không</option>
+                                                <option value="vehicle">Phát hiện và theo dõi phương tiện</option>
+                                                <option value="helmet">Phát hiện vi phạm không đội mũ bảo hiểm</option>
+                                                <option value="lane">Phát hiện vi phạm đi sai làn đường</option>
+                                                <option value="light">Phát hiện vi phạm vượt đèn đỏ</option>
                                             </select>
                                         </div>
                                         <div class="form-group roi-settings">
@@ -148,7 +148,7 @@
                                         </div>
                                         <div class="form-group roi-settings">
                                             <label for="roi_y1">ROI Y1:</label>
-                                            <input type="number" class="form-control" id="roi_y1" value="350">
+                                            <input type="number" class="form-control" id="roi_y1" value="100">
                                         </div>
                                         <div class="form-group roi-settings">
                                             <label for="roi_x2">ROI X2:</label>
@@ -159,36 +159,139 @@
                                             <input type="number" class="form-control" id="roi_y2" value="750">
                                         </div>
                                         <div class="form-group light-settings" style="display: none;">
-                                            <label for="light_roi_x1">Light ROI X1:</label>
-                                            <input type="number" class="form-control" id="light_roi_x1" value="0">
-                                            <label for="light_roi_y1">Light ROI Y1:</label>
-                                            <input type="number" class="form-control" id="light_roi_y1" value="0">
-                                            <label for="light_roi_x2">Light ROI X2:</label>
-                                            <input type="number" class="form-control" id="light_roi_x2" value="0">
-                                            <label for="light_roi_y2">Light ROI Y2:</label>
-                                            <input type="number" class="form-control" id="light_roi_y2" value="0">
-                                            <label for="y_line">Y Line:</label>
-                                            <input type="number" class="form-control" id="y_line" value="450">
+                                            <div class="d-flex">
+                                                <div class="mr-5">
+                                                    <div class="form-group">
+                                                        <label for="roi_x1">ROI X1:</label>
+                                                        <input type="number" class="form-control" id="roi_x1" value="100">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="roi_y1">ROI Y1:</label>
+                                                        <input type="number" class="form-control" id="roi_y1" value="400">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="roi_x2">ROI X2:</label>
+                                                        <input type="number" class="form-control" id="roi_x2" value="600">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="roi_y2">ROI Y2:</label>
+                                                        <input type="number" class="form-control" id="roi_y2" value="600">
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <label for="light_roi_x1">Light ROI X1:</label>
+                                                    <input type="number" class="form-control" id="light_roi_x1" value="970">
+                                                    <label for="light_roi_y1">Light ROI Y1:</label>
+                                                    <input type="number" class="form-control" id="light_roi_y1" value="120">
+                                                    <label for="light_roi_x2">Light ROI X2:</label>
+                                                    <input type="number" class="form-control" id="light_roi_x2" value="1020">
+                                                    <label for="light_roi_y2">Light ROI Y2:</label>
+                                                    <input type="number" class="form-control" id="light_roi_y2" value="150">
+                                                    <label for="y_line">Y Line:</label>
+                                                    <input type="number" class="form-control" id="y_line" value="370">
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <br>
+                                                <p style="font-weight: bold;">Kẻ đường dọc làn phải:</p>
+                                                <div class="right-settings d-flex">
+                                                    <div class="mr-5">
+                                                        <div class="form-group">
+                                                            <label for="right_x1">Right X1:</label>
+                                                            <input type="number" class="form-control" id="right_x1" value="850">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="right_y1">Right Y1:</label>
+                                                            <input type="number" class="form-control" id="right_y1" value="200">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div class="mr-5">
+                                                        <div class="form-group">
+                                                            <label for="right_x2">Right X2:</label>
+                                                            <input type="number" class="form-control" id="right_x2" value="850">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="right_y2">Right Y2:</label>
+                                                        <input type="number" class="form-control" id="right_y2" value="350">
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <!-- <div class="mr-5">
+                                                        <label for="right_y1">Right Y1:</label>
+                                                        <input type="number" class="form-control" id="right_y1" value="200">
+                                                    </div>
+                                                    <div class="mr-5">
+                                                        <label for="right_x2">Right X2:</label>
+                                                        <input type="number" class="form-control" id="right_x2" value="850">
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="right_y2">Right Y2:</label>
+                                                        <input type="number" class="form-control" id="right_y2" value="350">
+                                                    </div> -->
+                                                </div>
+                                                <br>
+                                                <p style="font-weight: bold;">Điều kiện rẽ phải:</p>
+                                                <div class="d-flex">
+                                                    <div class="">
+                                                        <div class="form-check mr-5">
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="duoc_re_phai" checked>
+                                                            <label class="form-check-label" for="duoc_re_phai">
+                                                              Được rẽ phải
+                                                            </label>
+                                                        </div>
+                                                        <div class="">
+                                                            <div class="form-group lane-setting" style="display: block;">
+                                                                <select id="leftLaneLabels" class="form-control" multiple>
+                                                                    <option value="car">Xe oto con</option>
+                                                                    <option value="truck">Xe tải</option>
+                                                                    <option value="motorcycle">Xe máy</option>
+                                                                    <option value="bus">Xe bus</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                        <div class="">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="radio" name="flexRadioDefault" id="khong_re_phai">
+                                                                <label class="form-check-label" for="khong_re_phai">
+                                                                  Không được rẽ phải
+                                                                </label>
+                                                            </div>
+                                                            
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group lane-settings" style="display: none;">
-                                            <label for="leftLaneLabels">Left Lane Vehicle Labels:</label>
-                                            <select id="leftLaneLabels" class="form-control" multiple>
-                                                <option value="car">Car</option>
-                                                <option value="truck">Truck</option>
-                                                <option value="motorcycle">Motorbike</option>
-                                                <option value="bus">Bus</option>
-                                            </select>
+                                        <div class="d-flex">
+                                            <div class="mr-5">
+                                                <div class="form-group lane-settings" style="display: none;">
+                                                    <label for="leftLaneLabels">Phương tiện đúng làn trái:</label>
+                                                    <select id="leftLaneLabels" class="form-control" multiple>
+                                                        <option value="car">Xe oto con</option>
+                                                        <option value="truck">Xe tải</option>
+                                                        <option value="motorcycle">Xe máy</option>
+                                                        <option value="bus">Xe bus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mr-5">
+                                                <div class="form-group lane-settings" style="display: none;">
+                                                    <label for="rightLaneLabels">Phương tiện đúng làn phải:</label>
+                                                    <select id="rightLaneLabels" class="form-control" multiple>
+                                                        <option value="car">Xe oto con</option>
+                                                        <option value="truck">Xe tải</option>
+                                                        <option value="motorcycle">Xe máy</option>
+                                                        <option value="bus">Xe bus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group lane-settings" style="display: none;">
-                                            <label for="rightLaneLabels">Right Lane Vehicle Labels:</label>
-                                            <select id="rightLaneLabels" class="form-control" multiple>
-                                                <option value="car">Car</option>
-                                                <option value="truck">Truck</option>
-                                                <option value="motorcycle">Motorbike</option>
-                                                <option value="bus">Bus</option>
-                                            </select>
-                                        </div>
-                                        <button type="button" class="btn btn-primary" onclick="startDetection()">Start Detection</button>
+                                        
+                                        
+                                        <button type="button" class="btn btn-primary" onclick="startDetection()" id="start">Bắt đầu</button>
                                     </form>
                                 </div>
                             </div>
@@ -203,7 +306,11 @@
     </a>
     <script>
         var ws;
+        // var ws_url;
         function startDetection() {
+            if ( ws) {
+                ws.close();
+            }
             connectWebSocket(); // Only connect after configuration is complete
         }
 
@@ -234,8 +341,24 @@
                 var light_roi_x2 = document.getElementById('light_roi_x2').value;
                 var light_roi_y2 = document.getElementById('light_roi_y2').value;
                 var y_line = document.getElementById('y_line').value;
+
+                var right_x1 = document.getElementById('right_x1').value;
+                var right_y1 = document.getElementById('right_y1').value;
+                var right_x2 = document.getElementById('right_x2').value;
+                var right_y2 = document.getElementById('right_y2').value;
+
+                var right_turn_allowed = document.querySelector('input[name="flexRadioDefault"]:checked').id;
+                var rightTurnAllowed;
+                if (right_turn_allowed === 'duoc_re_phai') {
+                    rightTurnAllowed = 'duoc_re_phai';
+                } else {
+                    rightTurnAllowed = 'khong_duoc_re';
+                }
                 ws_url += `&lightRoiX1=${light_roi_x1}&lightRoiY1=${light_roi_y1}&lightRoiX2=${light_roi_x2}&lightRoiY2=${light_roi_y2}&yLine=${y_line}`;
+                ws_url += `&rightX1=${right_x1}&rightY1=${right_y1}&rightX2=${right_x2}&rightY2=${right_y2}&rightTurnAllowed=${rightTurnAllowed}`;
             }
+
+
             ws = new WebSocket(ws_url);
             var img = document.getElementById("cameraFeed");
 
@@ -245,6 +368,27 @@
                 img.src = url;
             };
         }
+        
+        function openVideo(event) {
+            event.preventDefault(); // Ngăn hành vi mặc định (mở ảnh tĩnh)
+            const videoName = "sample_video.mp4"; // Tên video bạn muốn truyền tải
+            window.open(`/stream/${videoName}`, '_blank'); // Mở tab mới và truyền video vào
+        }
+
+        function updateVisibility() {
+            var rightTurnAllowed = document.querySelector('input[name="flexRadioDefault"]:checked').id;
+            var rightX1Y1 = document.getElementById('right_x1_y1');
+            var rightX2Y2 = document.getElementById('right_x2_y2');
+
+            if (rightTurnAllowed === 'duoc_re_phai') {
+                rightX1Y1.classList.remove('hidden');
+                rightX2Y2.classList.add('hidden');
+            } else {
+                rightX1Y1.classList.add('hidden');
+                rightX2Y2.classList.remove('hidden');
+            }
+        }
+        
 
         document.getElementById('videoSelect').addEventListener('change', connectWebSocket);
         document.getElementById('detectionType').addEventListener('change', function() {
@@ -270,17 +414,17 @@
                 lightSettings.forEach(el => el.style.display = 'none');
                 laneSettings.forEach(el => el.style.display = 'none');
             }
-            connectWebSocket();
+            // connectWebSocket();
         });
-        document.getElementById('roi_x1').addEventListener('change', connectWebSocket);
-        document.getElementById('roi_y1').addEventListener('change', connectWebSocket);
-        document.getElementById('roi_x2').addEventListener('change', connectWebSocket);
-        document.getElementById('roi_y2').addEventListener('change', connectWebSocket);
-        document.getElementById('light_roi_x1').addEventListener('change', connectWebSocket);
-        document.getElementById('light_roi_y1').addEventListener('change', connectWebSocket);
-        document.getElementById('light_roi_x2').addEventListener('change', connectWebSocket);
-        document.getElementById('light_roi_y2').addEventListener('change', connectWebSocket);
-        document.getElementById('y_line').addEventListener('change', connectWebSocket);
+        // document.getElementById('roi_x1').addEventListener('change', connectWebSocket);
+        // document.getElementById('roi_y1').addEventListener('change', connectWebSocket);
+        // document.getElementById('roi_x2').addEventListener('change', connectWebSocket);
+        // document.getElementById('roi_y2').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_x1').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_y1').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_x2').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_y2').addEventListener('change', connectWebSocket);
+        // document.getElementById('y_line').addEventListener('change', connectWebSocket);
 
         document.getElementById('videoSelect').dispatchEvent(new Event('change'));
     </script>

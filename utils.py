@@ -14,8 +14,10 @@ def xyxy2xywh(x):
     return y
 
 # Function to detect if a frame is red
-def is_red(frame, threshold=0.008, tich_luy_hien_tai=0, tich_luy=3):
-    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+def is_red(light_frame, threshold=0.008, tich_luy_hien_tai=0, tich_luy=3):
+    # tích lũy hiện tại: số lần liên tiếp phát hiện đèn đỏ trong các frame trước
+    # tích lũy: giá trị tích lũy cần thiết để xác nhận đèn đỏ
+    hsv = cv2.cvtColor(light_frame, cv2.COLOR_BGR2HSV)
     lower_red1 = np.array([0, 70, 50])
     upper_red1 = np.array([10, 255, 255])
     lower_red2 = np.array([170, 70, 50])

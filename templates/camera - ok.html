@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Camera</title>
+    <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
+</head>
+<body id="page-top">
+    <div id="wrapper">
+        {% include "sidebar.html" %}
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                        <div class="input-group">
+                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                                aria-label="Search" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-primary" type="button">
+                                    <i class="fas fa-search fa-sm"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                            placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown no-arrow mx-1">
+                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
+                                <span class="badge badge-danger badge-counter">1+</span>
+                            </a>
+                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown">
+                                <h6 class="dropdown-header">
+                                    Alerts Center
+                                </h6>
+                                <a class="dropdown-item d-flex align-items-center" href="#">
+                                    <div class="mr-3">
+                                        <div class="icon-circle bg-primary">
+                                            <i class="fas fa-file-alt text-white"></i>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <div class="small text-gray-500">December 12, 2019</div>
+                                        <span class="font-weight-bold">Xin chào!</span>
+                                    </div>
+                                </a>
+                            </div>
+                        </li>
+                        <div class="topbar-divider d-none d-sm-block"></div>
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                                <img class="img-profile rounded-circle" src="/static/img/undraw_profile.svg">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="login" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+                <div class="container-fluid">
+                    <h1 class="h3 mb-2 text-gray-800">Camera</h1>
+                    <p class="mb-4">Tổng hợp hệ thống camera</p>
+                    <div class="row">
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Chọn camera</h6>
+                                </div>
+                                <div class="card-body">
+                                    <select id="videoSelect" class="form-control">
+                                        {% for video in video_files %}
+                                        <option value="{{ video }}">{{ video }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </div>
+                                <div class="col-lg-12 mb-4">
+                                    <div class="card shadow mb-4">
+                                        <div class="card-header py-3">
+                                            <h6 class="m-0 font-weight-bold text-primary" oncontextmenu="openVideo(event)">Camera đã chọn</h6>
+                                        </div>
+                                        <div class="card-body">
+                                            <img id="cameraFeed" alt="Camera Feed" style="width:100%; height: auto;" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 mb-4">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Thiết lập</h6>
+                                </div>
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="detectionType">Chọn loại phát hiện:</label>
+                                            <select id="detectionType" class="form-control">
+                                                <option value="none">Không</option>
+                                                <option value="vehicle">Phát hiện và theo dõi phương tiện</option>
+                                                <option value="helmet">Phát hiện vi phạm không đội mũ bảo hiểm</option>
+                                                <option value="lane">Phát hiện vi phạm đi sai làn đường</option>
+                                                <option value="light">Phát hiện vi phạm vượt đèn đỏ</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group roi-settings">
+                                            <label for="roi_x1">ROI X1:</label>
+                                            <input type="number" class="form-control" id="roi_x1" value="100">
+                                        </div>
+                                        <div class="form-group roi-settings">
+                                            <label for="roi_y1">ROI Y1:</label>
+                                            <input type="number" class="form-control" id="roi_y1" value="100">
+                                        </div>
+                                        <div class="form-group roi-settings">
+                                            <label for="roi_x2">ROI X2:</label>
+                                            <input type="number" class="form-control" id="roi_x2" value="1150">
+                                        </div>
+                                        <div class="form-group roi-settings">
+                                            <label for="roi_y2">ROI Y2:</label>
+                                            <input type="number" class="form-control" id="roi_y2" value="750">
+                                        </div>
+                                        <div class="form-group light-settings" style="display: none;">
+                                            <div class="d-flex">
+                                                <div class="mr-5">
+                                                    <div class="form-group">
+                                                        <label for="roi_x1">ROI X1:</label>
+                                                        <input type="number" class="form-control" id="roi_x1" value="100">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="roi_y1">ROI Y1:</label>
+                                                        <input type="number" class="form-control" id="roi_y1" value="400">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="roi_x2">ROI X2:</label>
+                                                        <input type="number" class="form-control" id="roi_x2" value="600">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label for="roi_y2">ROI Y2:</label>
+                                                        <input type="number" class="form-control" id="roi_y2" value="600">
+                                                    </div>
+                                                </div>
+                                                <div class="">
+                                                    <label for="light_roi_x1">Light ROI X1:</label>
+                                                    <input type="number" class="form-control" id="light_roi_x1" value="970">
+                                                    <label for="light_roi_y1">Light ROI Y1:</label>
+                                                    <input type="number" class="form-control" id="light_roi_y1" value="120">
+                                                    <label for="light_roi_x2">Light ROI X2:</label>
+                                                    <input type="number" class="form-control" id="light_roi_x2" value="1020">
+                                                    <label for="light_roi_y2">Light ROI Y2:</label>
+                                                    <input type="number" class="form-control" id="light_roi_y2" value="150">
+                                                    <label for="y_line">Y Line:</label>
+                                                    <input type="number" class="form-control" id="y_line" value="370">
+                                                </div>
+                                            </div>
+                                            <div class="">
+                                                <br>
+                                                <p>Kẻ đường dọc làn phải:</p>
+                                                <div class="right-settings d-flex">
+                                                    <div class="mr-5">
+                                                        <label for="right_x1">Right X1:</label>
+                                                        <input type="number" class="form-control" id="right_x1" value="850">
+                                                    </div>
+                                                    <div class="mr-5">
+                                                        <label for="right_y1">Right Y1:</label>
+                                                        <input type="number" class="form-control" id="right_y1" value="200">
+                                                    </div>
+                                                    <div class="mr-5">
+                                                        <label for="right_x2">Right X2:</label>
+                                                        <input type="number" class="form-control" id="right_x2" value="850">
+                                                    </div>
+                                                    <div class="">
+                                                        <label for="right_y2">Right Y2:</label>
+                                                        <input type="number" class="form-control" id="right_y2" value="350">
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <p>Điều kiện rẽ phải:</p>
+                                                <div class="d-flex">
+                                                    <div class="mr-5">
+                                                        <div class="form-check mr-5">
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="duoc_re_phai" checked>
+                                                            <label class="form-check-label" for="duoc_re_phai">
+                                                              Được rẽ phải
+                                                            </label>
+                                                        </div>
+                                                        <div class="">
+                                                            <div class="form-group lane-setting" style="display: block;">
+                                                                <select id="leftLaneLabels" class="form-control" multiple>
+                                                                    <option value="car">Xe oto con</option>
+                                                                    <option value="truck">Xe tải</option>
+                                                                    <option value="motorcycle">Xe máy</option>
+                                                                    <option value="bus">Xe bus</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                    <div class="mr-5">
+                                                        <div class="form-check">
+                                                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="khong_re_phai">
+                                                            <label class="form-check-label" for="khong_re_phai">
+                                                              Không được rẽ phải
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex">
+                                            <div class="mr-5">
+                                                <div class="form-group lane-settings" style="display: none;">
+                                                    <label for="leftLaneLabels">Phương tiện đúng làn trái:</label>
+                                                    <select id="leftLaneLabels" class="form-control" multiple>
+                                                        <option value="car">Xe oto con</option>
+                                                        <option value="truck">Xe tải</option>
+                                                        <option value="motorcycle">Xe máy</option>
+                                                        <option value="bus">Xe bus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="mr-5">
+                                                <div class="form-group lane-settings" style="display: none;">
+                                                    <label for="rightLaneLabels">Phương tiện đúng làn trái:</label>
+                                                    <select id="rightLaneLabels" class="form-control" multiple>
+                                                        <option value="car">Xe oto con</option>
+                                                        <option value="truck">Xe tải</option>
+                                                        <option value="motorcycle">Xe máy</option>
+                                                        <option value="bus">Xe bus</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        <button type="button" class="btn btn-primary" onclick="startDetection()" id="start">Bắt đầu</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+    <script>
+        var ws;
+        // var ws_url;
+        function startDetection() {
+            if ( ws) {
+                ws.close();
+            }
+            connectWebSocket(); // Only connect after configuration is complete
+        }
+
+        function connectWebSocket() {
+            if (ws) {
+                ws.close();
+            }
+            var video = document.getElementById('videoSelect').value;
+            var detectionType = document.getElementById('detectionType').value;
+            var roi_x1 = document.getElementById('roi_x1').value;
+            var roi_y1 = document.getElementById('roi_y1').value;
+            var roi_x2 = document.getElementById('roi_x2').value;
+            var roi_y2 = document.getElementById('roi_y2').value;
+            
+            // Read selections for left and right lane labels
+            var leftLabels = Array.from(document.getElementById('leftLaneLabels').selectedOptions).map(option => option.value);
+            var rightLabels = Array.from(document.getElementById('rightLaneLabels').selectedOptions).map(option => option.value);
+            
+            // Encode arrays as JSON strings to include in the WebSocket URL
+            var leftLabelsJson = encodeURIComponent(JSON.stringify(leftLabels));
+            var rightLabelsJson = encodeURIComponent(JSON.stringify(rightLabels));
+
+            var ws_url = `ws://localhost:8000/ws/${video}?detectionType=${detectionType}&roi_x1=${roi_x1}&roi_y1=${roi_y1}&roi_x2=${roi_x2}&roi_y2=${roi_y2}&leftLabels=${leftLabelsJson}&rightLabels=${rightLabelsJson}`;
+            
+            if (detectionType === 'light') {
+                var light_roi_x1 = document.getElementById('light_roi_x1').value;
+                var light_roi_y1 = document.getElementById('light_roi_y1').value;
+                var light_roi_x2 = document.getElementById('light_roi_x2').value;
+                var light_roi_y2 = document.getElementById('light_roi_y2').value;
+                var y_line = document.getElementById('y_line').value;
+
+                var right_x1 = document.getElementById('right_x1').value;
+                var right_y1 = document.getElementById('right_y1').value;
+                var right_x2 = document.getElementById('right_x2').value;
+                var right_y2 = document.getElementById('right_y2').value;
+
+                var right_turn_allowed = document.querySelector('input[name="flexRadioDefault"]:checked').id;
+                var rightTurnAllowed;
+                if (right_turn_allowed === 'duoc_re_phai') {
+                    rightTurnAllowed = 'duoc_re_phai';
+                } else {
+                    rightTurnAllowed = 'khong_duoc_re';
+                }
+                ws_url += `&lightRoiX1=${light_roi_x1}&lightRoiY1=${light_roi_y1}&lightRoiX2=${light_roi_x2}&lightRoiY2=${light_roi_y2}&yLine=${y_line}`;
+                ws_url += `&rightX1=${right_x1}&rightY1=${right_y1}&rightX2=${right_x2}&rightY2=${right_y2}&rightTurnAllowed=${rightTurnAllowed}`;
+            }
+
+
+            ws = new WebSocket(ws_url);
+            var img = document.getElementById("cameraFeed");
+
+            ws.onmessage = function(event) {
+                var blob = new Blob([event.data], { type: 'image/jpeg' });
+                var url = URL.createObjectURL(blob);
+                img.src = url;
+            };
+        }
+        
+        function openVideo(event) {
+            event.preventDefault(); // Ngăn hành vi mặc định (mở ảnh tĩnh)
+            const videoName = "sample_video.mp4"; // Tên video bạn muốn truyền tải
+            window.open(`/stream/${videoName}`, '_blank'); // Mở tab mới và truyền video vào
+        }
+
+        function updateVisibility() {
+            var rightTurnAllowed = document.querySelector('input[name="flexRadioDefault"]:checked').id;
+            var rightX1Y1 = document.getElementById('right_x1_y1');
+            var rightX2Y2 = document.getElementById('right_x2_y2');
+
+            if (rightTurnAllowed === 'duoc_re_phai') {
+                rightX1Y1.classList.remove('hidden');
+                rightX2Y2.classList.add('hidden');
+            } else {
+                rightX1Y1.classList.add('hidden');
+                rightX2Y2.classList.remove('hidden');
+            }
+        }
+        
+
+        document.getElementById('videoSelect').addEventListener('change', connectWebSocket);
+        document.getElementById('detectionType').addEventListener('change', function() {
+            var detectionType = document.getElementById('detectionType').value;
+            var roiSettings = document.querySelectorAll('.roi-settings');
+            var lightSettings = document.querySelectorAll('.light-settings');
+            var laneSettings = document.querySelectorAll('.lane-settings');
+
+            if (detectionType === 'vehicle' || detectionType === 'helmet') {
+                roiSettings.forEach(el => el.style.display = 'block');
+                lightSettings.forEach(el => el.style.display = 'none');
+                laneSettings.forEach(el => el.style.display = 'none');
+            } else if (detectionType === 'light') {
+                roiSettings.forEach(el => el.style.display = 'none');
+                lightSettings.forEach(el => el.style.display = 'block');
+                laneSettings.forEach(el => el.style.display = 'none');
+            } else if (detectionType === 'lane') {
+                roiSettings.forEach(el => el.style.display = 'block');
+                lightSettings.forEach(el => el.style.display = 'none');
+                laneSettings.forEach(el => el.style.display = 'block');
+            } else {
+                roiSettings.forEach(el => el.style.display = 'none');
+                lightSettings.forEach(el => el.style.display = 'none');
+                laneSettings.forEach(el => el.style.display = 'none');
+            }
+            // connectWebSocket();
+        });
+        // document.getElementById('roi_x1').addEventListener('change', connectWebSocket);
+        // document.getElementById('roi_y1').addEventListener('change', connectWebSocket);
+        // document.getElementById('roi_x2').addEventListener('change', connectWebSocket);
+        // document.getElementById('roi_y2').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_x1').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_y1').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_x2').addEventListener('change', connectWebSocket);
+        // document.getElementById('light_roi_y2').addEventListener('change', connectWebSocket);
+        // document.getElementById('y_line').addEventListener('change', connectWebSocket);
+
+        document.getElementById('videoSelect').dispatchEvent(new Event('change'));
+    </script>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="/static/js/sb-admin-2.min.js"></script>
+    <script src="/static/vendor/chart.js/Chart.min.js"></script>
+    <script src="/static/js/demo/chart-area-demo.js"></script>
+    <script src="/static/js/demo/chart-pie-demo.js"></script>
+    <script src="/static/js/demo/chart-bar-demo.js"></script>
+</body>
+</html>
