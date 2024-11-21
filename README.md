@@ -35,9 +35,9 @@ Các thư mục & tệp tin:
 
 Nguồn dữ liệu lấy tại:
 
-- tải ứng dụng iHaNoi về điện thoại 
-- đăng ký tài khoản, có thể chọn quận Hà Đông, phường Lam Khê
-- đăng nhập
+- Tải ứng dụng iHaNoi về điện thoại 
+- Đăng ký tài khoản, có thể chọn quận Hà Đông, phường Lam Khê
+- Đăng nhập
 - Tiện ích đô thị thông minh -> Giao thông -> Camera giao thông
 
 -------------------------------------------------------------------------------------------------------------------------
