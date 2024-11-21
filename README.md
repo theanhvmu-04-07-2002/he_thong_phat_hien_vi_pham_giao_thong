@@ -49,14 +49,26 @@ Nguồn dữ liệu lấy tại:
 -------------------------------------------------------------------------------------------------------------------------
 **Demo bắt lỗi vượt đèn đỏ**
   ( chú ý xử lý lỗi tại điều kiện: đèn đỏ được rẽ phải )
-  
-![49](https://github.com/user-attachments/assets/22c7db78-f286-4056-b22a-4d4c523a9bdf)
+
+**Phát hiện phương tiện vượt đèn đỏ**
+
+![image](https://github.com/user-attachments/assets/0808782e-1b5a-4cd0-ac55-e4758df67422)
+
+**Lưu hình ảnh phương tiện vượt đèn đỏ**
+
+![image](https://github.com/user-attachments/assets/d196d2fe-a714-48a4-b851-7439801250e4)
 
 
 -------------------------------------------------------------------------------------------------------------------------
 **Demo bắt lỗi đi sai làn**
 
-![8](https://github.com/user-attachments/assets/324e052c-fdca-450d-b11c-d7565722b78f)
+**Phát hiện phương tiện đi sai làn**
+
+![image](https://github.com/user-attachments/assets/f12bee8d-893a-4ebb-9862-36de0dc5e99c)
+
+**Lưu hình ảnh phương tiện đi sai làn**
+
+![image](https://github.com/user-attachments/assets/4041664e-403e-49b3-81bf-e3b71b77616f)
 
 -------------------------------------------------------------------------------------------------------------------------
 **Demo bắt lỗi không đội mũ bảo hiểm**
